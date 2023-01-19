@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abazar</title>
+</head>
+<body>
+    <h1>Abazar ip manzil olish</h1>
+
+    <script>
+let tg = window.Telegram.WebApp;
+
+tg.expand();
+
+tg.MainButton.textColor = "#FFFFFF";
+tg.MainButton.color = "#2cab37";
+
+ tg.MainButton.setText("Ip adress yuborish");
+ tg.MainButton.show();
+
+
+ let data = "Null"
+ async function fetchText() {
+     let response = await fetch('https://api.ipify.org?format=json');
+     if (response.status === 200) {
+         data = await response.json();
+         data = data.ip
+     }
+     else{
+         data = "Null"
+     }
+ }
+ 
+ fetchText();
+
+
+
+Telegram.WebApp.onEvent('mainButtonClicked', function(){
+    tg.sendData(data)
+});
+
+    </script>
+</body>
+</html>
